@@ -5,36 +5,32 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import WasherDryerScreen from './WasherDryerScreen';
 import { Button } from 'react-native-elements';
+import Firebase, {db} from './config/FireBase';
 
 const Stack = createStackNavigator();
-
 const styles = StyleSheet.create({
   screenText: {
       flex: 1,
       alignItems: 'center',
-      backgroundColor: 'rgb(124, 102, 154 )',
       justifyContent: 'center'
   },
   homeScreen: {
     flex: 1,
       alignItems: 'center',
-      backgroundColor: 'rgb(124, 102, 154 )',
       justifyContent: 'center'
   }
 });
 
 class AppNavigator extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      logInUsername: "",
+      logInEmail: "",
       logInPassword: "",
-      signUpUsername: "",
+      signUpEmail: "",
       signUpPassword: "",
-      code: ""
-    };
-    this.map = new Map(); 
+      code: "",
+    }; 
   }
 
     MyTheme = {
@@ -47,6 +43,7 @@ class AppNavigator extends React.Component {
           border: 'rgb(199, 199, 204)',
       },
     };
+
 
     HomeScreen = ({ navigation }) => {
       return (
@@ -66,37 +63,38 @@ class AppNavigator extends React.Component {
           contentContainerStyle={styles.screenText}
           resetScrollToCoords={{ x: 0, y: 0 }}
           scrollEnabled={false} >
-          <Text style = {{color:"white", fontSize: 25, fontWeight: "bold"}}> Sign Up </Text>
+          <Text style = {{color:"black", fontSize: 25, fontWeight: "bold"}}> Sign Up </Text>
           <View style = {{paddingBottom: 10, paddingTop: 20}}>      
           <TextInput
-          style={{width: 200, height: 40, borderRadius: 20, borderWidth: 2, borderColor: "white", color: "white"}}
-          placeholder = "  Username"
-          placeholderTextColor = "white"
+          style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
+          placeholder = " Email"
+          placeholderTextColor = "black"
           autoCapitalize = "none"
-          onChangeText = {(text) => this.setState({signUpUsername: text})}
+          onChangeText = {(text) => this.setState({signUpEmail: text})}
           autoCorrect = {false}/>
           </View>
           <View style = {{paddingBottom: 10, paddingTop: 10, paddingBottom: 15}}>      
           <TextInput
           secureTextEntry = {true}
           password = {true}
-          style={{width: 200, height: 40, borderRadius: 20, borderWidth: 2, borderColor: "white", color: "white", paddingLeft: 5}}
+          style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
           placeholder = " Password"
           autoCapitalize = "none"
           autoCorrect = {false}
           onChangeText = {(text) => this.setState({signUpPassword: text})}
-          placeholderTextColor = "white"/>
+          placeholderTextColor = "black"/>
           </View>
           <View style = {{paddingBottom: 10, paddingTop: 8, paddingBottom: 15}}>      
           <TextInput
-          style={{ width: 200, height: 40, borderRadius: 20, borderWidth: 2, borderColor: "white", color: "white"}}
-          placeholder = "  Special Code"
+          style={{ width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
+          placeholder = " Special Code"
           autoCapitalize = "none"
           autoCorrect = {false}
           onChangeText = {(text) => this.setState({code: text})}
-          placeholderTextColor = "white"/>
+          placeholderTextColor = "black"/>
           </View>
-          <Button color = "white" title = "Create account!" style = {{width: 200, paddingTop: 8}}
+          <Button color = "black" title = "Create account!" style = {{width: 160, paddingTop: 8}} 
+          buttonStyle = {{borderRadius: 15, backgroundColor: "black"}}
           onPress={() => this.handleSignUp({navigation})}>
           </Button>
           </KeyboardAwareScrollView>
@@ -112,74 +110,93 @@ class AppNavigator extends React.Component {
           <View style = {{paddingBottom: 20}}>
               <Image source = {require('./logo.png')} style = {{width: 180, height: 180, alignSelf: 'center'}}/>
           </View>
-          <Text style = {{color: "white", fontSize: 25, fontWeight: "bold"}}>LaundryLine</Text>
+          <Text style = {{color: "black", fontSize: 25, fontWeight: "bold"}}>LaundryLine</Text>
           <View style = {{paddingBottom: 10, paddingTop: 20}}>      
             <TextInput
-          style={{width: 200, height: 40, borderRadius: 20, borderWidth: 2, borderColor: "white", color: "white"}}
-          placeholder = "  Username"
+          style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
+          placeholder = " Email"
           autoCapitalize = "none"
           autoCorrect = {false}
-          onChangeText = {(text) => this.setState({logInUsername: text})}
-          placeholderTextColor = "white"/>
+          onChangeText = {(text) => this.setState({logInEmail: text})}
+          placeholderTextColor = "black"/>
           </View>
           <View style = {{paddingBottom: 10, paddingTop: 10, paddingBottom: 15}}>      
           <TextInput
           secureTextEntry = {true}
           password = {true}
           autoCapitalize = "none"
-          style={{width: 200, height: 40, borderRadius: 20, borderWidth: 2, borderColor: "white", color: "white", paddingLeft: 5}}
+          style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
           placeholder = " Password"
           autoCorrect = {false}
           onChangeText = {(text) => this.setState({logInPassword: text})}
-          placeholderTextColor = "white"/>
+          placeholderTextColor = "black"
+          clearButtonMode = 'always'/>
           </View>
-          <Button color = "white" title = "Login" style = {{width: 200, paddingTop: 8}}
+          <Button color = "white" title = "Login" style = {{width: 100, paddingTop: 8}}
+            buttonStyle = {{backgroundColor: "black", borderRadius: 15}}
             onPress={() => this.handleLogIn({navigation})}>
           </Button>
-          <View style = {{paddingTop: 18}}>
-          <Text style = {{fontSize: 11, color:"white", textAlign: "center"}}> Don't have an account yet? </Text>
-          <Text style={{fontSize: 11, color:"rgb(245,92,92)", textAlign: "center"}} onPress={()=> navigation.navigate('Sign Up')}> Sign Up </Text>
+          <View style = {{paddingTop: 24}}>
+          <Text style = {{fontSize: 13, color:"black", textAlign: "center"}}> Don't have an account yet? </Text>
+          <Text style={{fontSize: 13, color:"rgb(245,92,92)", textAlign: "center"}} onPress={()=> navigation.navigate('Sign Up')}> Sign Up </Text>
           </View>
         </KeyboardAwareScrollView>
       );
     }
 
     handleLogIn = ({navigation}) => {
-      if (this.map.has(this.state.logInUsername) && this.map.get(this.state.logInUsername) === this.state.logInPassword) {
-        navigation.navigate('Home');
-        this.setState({logInUsername: '', logInPassword: ''});
-      } else {
-        return (
-          Alert.alert('NOTE', 'USERNAME AND/OR PASSWORD ARE INCORRECT. TRY AGAIN.')
-        )
-      }
+      const { logInEmail, logInPassword } = this.state
+
+        Firebase.auth()
+            .signInWithEmailAndPassword(logInEmail, logInPassword)
+            .then(() => this.loggedInOrSignedUp({navigation}))
+            .catch(error => this.sendAlert(error))
     }
 
     handleSignUp = ({navigation}) => {
-      if (!this.map.has(this.state.signUpUsername) && this.state.signUpPassword.length >= 8 && this.state.signUpUsername.length > 0) {
-        this.map.set(this.state.signUpUsername, this.state.signUpPassword);
-        navigation.navigate('Home');
-        this.setState({signUpPassword: '', signUpUsername: '', code: ''});
-      } else if (this.map.has(this.state.signUpUsername)) {
-        return (
-          Alert.alert('NOTE', 'USERNAME HAS BEEN TAKEN. TRY AGAIN.')
-        )
-      } else if (this.state.signUpUsername.length == 0) {
-          Alert.alert('NOTE', 'PLEASE ENTER A USERNAME.');
-      } else {
-        return (
-          Alert.alert('NOTE', 'PASSWORD SHOULD BE AT LEAST 8 CHARACTERS LONG. TRY AGAIN.')
-        )
-      }
+
+      try {
+        const { signUpEmail, signUpPassword } = this.state;
+        const response = Firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+        if (response.user.uid) {
+            const user = {
+                uid: response.user.uid,
+                email: signUpEmail
+            }
+
+            db.collection('users')
+                .doc(response.user.uid)
+                .set(user)
+
+            this.loggedInOrSignedUp({navigation})
+        }
+    } catch (e) {
+        Alert.alert(String(e))
+    }
+
+        // const { signUpEmail, signUpPassword } = this.state;
+        // Firebase.auth()
+        //     .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+        //     .then(() => this.loggedInOrSignedUp({navigation}))
+        //     .catch(error => this.sendAlert(error))
+    }
+
+    sendAlert = (error) => {
+        Alert.alert(String(error))
+    }
+
+    loggedInOrSignedUp = ({navigation}) => {
+      this.setState({logInEmail: '', logInPassword: '', signUpEmail: '', signUpPassword: ''});
+      navigation.navigate('Home');
     }
 
     render() {
       return (
         <NavigationContainer theme = {this.MyTheme}>
-          <Stack.Navigator initialRouteName="Log In">
+          <Stack.Navigator initialRouteName="Log In" headerMode = "none">
             <Stack.Screen name="Log In" component={this.LogInScreen} />
             <Stack.Screen name="Washers and Dryers" component={WasherDryerScreen} />
-            <Stack.Screen name = "Home" component = {this.HomeScreen} />
+            <Stack.Screen name ="Home" component = {this.HomeScreen} />
             <Stack.Screen name="Sign Up" component={this.SignupScreen} />
           </Stack.Navigator>
         </NavigationContainer>
@@ -188,5 +205,4 @@ class AppNavigator extends React.Component {
 }
 
 export default AppNavigator;
-
 

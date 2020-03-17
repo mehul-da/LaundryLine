@@ -6,7 +6,7 @@ import ChangingDryer from './changingDryer.js';
 function AllDryersAndWashers() {
 
   return (
-    <View>
+    <View style = {{paddingTop: 40}}>
       <View>
         <View style = {styles.washersOne}>
           <View style = {styles.individualDryerWasher}>

@@ -2,11 +2,12 @@ import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import ChangingWasher from './changingWasher.js';
 import ChangingDryer from './changingDryer.js';
+import { Button, Icon } from 'react-native-elements';
 
 function AllDryersAndWashers() {
 
   return (
-    <View style = {{paddingTop: 40}}>
+    <View>
       <View>
         <View style = {styles.washersOne}>
           <View style = {styles.individualDryerWasher}>

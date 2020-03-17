@@ -1,12 +1,24 @@
-import * as React from 'react';
-import AppNavigator from './AppNavigator.js';
-//import AllDryersAndWashers from './allDryersAndWashers.js';
+import React from 'react'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk'
+import AppNavigator from './AppNavigator'
+import rootReducer from './reducers/index'
+import {decode, encode} from 'base-64'
 
-function App() {
-  return (
-  <AppNavigator/>
-  );
+if (!global.btoa) {  global.btoa = encode }
+
+if (!global.atob) { global.atob = decode }
+
+const middleware = applyMiddleware(thunkMiddleware)
+const store = createStore(rootReducer, middleware)
+
+export default class App extends React.Component {
+    render() {
+      return(
+      <Provider store = {store}>
+        <AppNavigator/>
+      </Provider>
+      );
+    }
 }
-
-
-export default App;

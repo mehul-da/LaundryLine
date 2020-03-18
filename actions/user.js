@@ -5,6 +5,7 @@ import { Alert } from 'react-native';
 
 export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
+export const UPDATE_CODE = 'UPDATE_CODE'
 export const LOGIN = 'LOGIN'
 export const SIGNUP = 'SIGNUP'
 
@@ -24,6 +25,13 @@ export const updatePassword = password => {
     }
 }
 
+export const updateCode = code => {
+    return {
+        type: UPDATE_CODE,
+        payload: code
+    }
+}
+
 export const login = () => {
     return async (dispatch, getState) => {
         try {
@@ -36,27 +44,48 @@ export const login = () => {
     }
 }
 
-
 export const signup = () => {
     return async (dispatch, getState) => {
         try {
-            const { email, password } = getState().user
+            const { email, password, code } = getState().user
             const response = await Firebase.auth().createUserWithEmailAndPassword(email, password)
 
             if (response.user.uid) {
                 const user = {
                     uid: response.user.uid,
-                    email: email
+                    email: email,
+                    code: code
+                }
+                
+                const stateOfWashersDryers = {
+                    w1: false,
+                    w2: false,
+                    w3: false,
+                    w4: false,
+                    d1: false,
+                    d2: false,
+                    d3: false,
+                    d4: false
                 }
 
                 db.collection('users')
                     .doc(response.user.uid)
                     .set(user)
+                
+                const codesRef = db.collection('codes').doc(String(code))
+
+                codesRef.get()
+                    .then((docSnapshot) => {
+                    if (!docSnapshot.exists) {
+                        codesRef.set(stateOfWashersDryers)
+                    }
+                });
 
                 dispatch({ type: SIGNUP, payload: user })
             }
         } catch (e) {
-            Alert.alert("Error!", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. Both fields are filled in\n3. Your email & special code are valid\n4. Your password is at least 6 characters long\n")
+            console.log(e);
+            Alert.alert("Error!", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email is valid\n4. Your password is at least 6 characters long\n")
         }
     }
 }

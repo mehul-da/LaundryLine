@@ -3,56 +3,86 @@ import { View, StyleSheet, Image } from 'react-native';
 import ChangingWasher from './changingWasher.js';
 import ChangingDryer from './changingDryer.js';
 import { Button, Icon } from 'react-native-elements';
+import Firebase, { db } from './config/FireBase'
+import { connect } from 'react-redux'
+import { documentDirectory } from 'expo-file-system';
 
-function AllDryersAndWashers() {
+class AllDryersAndWashers extends React.Component {
 
-  return (
-    <View>
+  constructor(props) {
+    super(props);
+    this.state = {
+      w1: false,
+      w2: false,
+      w3: false,
+      w4: false,
+      d1: false,
+      d2: false,
+      d3: false,
+      d4: false
+    }
+  }
+    
+
+  render() {
+    const ok = db.collection('codes').doc(String(this.props.user.code)).get().then(documentSnapshot => {
+      this.setState({w1: documentSnapshot.data().w1,
+        w2: documentSnapshot.data().w2,
+        w3: documentSnapshot.data().w3,
+        w4: documentSnapshot.data().w4,
+        d1: documentSnapshot.data().d1,
+        d2: documentSnapshot.data().d2,
+        d3: documentSnapshot.data().d3,
+        d4: documentSnapshot.data().d4})
+    });
+    return (
       <View>
-        <View style = {styles.washersOne}>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingWasher/>
+        <View>
+          <View style = {styles.washersOne}>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingWasher occupied = {this.state.w1} washName = {1} code = {String(this.props.user.code)}/>
+            </View>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingWasher occupied = {this.state.w2} washName = {2} code = {String(this.props.user.code)}/>
+            </View>
           </View>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingWasher/>
+          <View style = {styles.washersTwo}>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingWasher occupied = {this.state.w3} washName = {3} code = {String(this.props.user.code)}/>
+            </View>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingWasher  occupied = {this.state.w4} washName = {4} code = {String(this.props.user.code)}/>
+            </View>
           </View>
         </View>
-        <View style = {styles.washersTwo}>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingWasher/>
+        <View>
+          <View style = {styles.dryersOne}>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingDryer occupied = {this.state.d1} dryerName = {1} code = {String(this.props.user.code)}/>
+            </View>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingDryer occupied = {this.state.d2} dryerName = {2} code = {String(this.props.user.code)}/>
+            </View>
           </View>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingWasher/>
+          <View style = {styles.dryersTwo}>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingDryer occupied = {this.state.d3} dryerName = {3} code = {String(this.props.user.code)}/>
+            </View>
+            <View style = {styles.individualDryerWasher}>
+              <ChangingDryer occupied = {this.state.d4} dryerName = {4} code = {String(this.props.user.code)}/>
+            </View>
           </View>
         </View>
       </View>
-      <View>
-        <View style = {styles.dryersOne}>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingDryer/>
-          </View>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingDryer/>
-          </View>
-        </View>
-        <View style = {styles.dryersTwo}>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingDryer/>
-          </View>
-          <View style = {styles.individualDryerWasher}>
-            <ChangingDryer/>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   washersOne: {
     flexDirection: 'row', 
     justifyContent: 'center',
-    paddingTop: 35
+    paddingTop: 25
   },
   washersTwo: {
     flexDirection: 'row', 
@@ -62,7 +92,7 @@ const styles = StyleSheet.create({
   dryersOne: {
     flexDirection: 'row', 
     justifyContent: 'center',
-    paddingTop: 60,
+    paddingTop: 40,
   },
   dryersTwo: {
     flexDirection: 'row', 
@@ -74,4 +104,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AllDryersAndWashers;
+const mapStateToProps = state => {
+  return {
+      user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(AllDryersAndWashers);

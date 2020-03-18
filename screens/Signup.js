@@ -4,10 +4,10 @@ import { Button, Icon } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, signup } from '../actions/user';
+import { updateEmail, updatePassword, updateCode, signup } from '../actions/user';
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ updateEmail, updatePassword, signup }, dispatch)
+    return bindActionCreators({ updateEmail, updatePassword, signup, updateCode }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -51,7 +51,7 @@ class Signup extends React.Component {
             onPress={() => this.props.navigation.navigate('Login')} />
             </View>
             <View style = {styles.screenText}>
-            <Text style = {{color:"black", fontSize: 25, fontWeight: "bold"}}> Sign Up </Text>
+            <Text style = {{color:"black", fontSize: 25, fontWeight: "bold", fontFamily: "Trebuchet MS"}}> Sign Up </Text>
             <View style = {{paddingBottom: 10, paddingTop: 20}}>      
             <TextInput
             style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
@@ -74,19 +74,22 @@ class Signup extends React.Component {
             onChangeText = {(text) => this.props.updatePassword(text)}
             placeholderTextColor = "black"/>
             </View>
-            <View style = {{paddingBottom: 10, paddingTop: 8, paddingBottom: 15}}>      
+            <View style = {{paddingBottom: 10, paddingTop: 6, paddingBottom: 15}}>      
             <TextInput
             style={{ width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
             placeholder = " Special Code"
             autoCapitalize = "none"
             autoCorrect = {false}
-            onChangeText = {(text) => this.setState({code: text})}
+            onChangeText = {(text) => this.props.updateCode(text)}
             placeholderTextColor = "black"/>
             </View>
-            <Button titleStyle = {{fontWeight: "bold"}}  color = "black" title = "Create account!" style = {{width: 170, paddingTop: 8}} 
-            buttonStyle = {{borderRadius: 15, backgroundColor: "black"}}
-            onPress={() => this.handleSignUp()}>
-            </Button>
+            <Icon
+            raised
+            name='arrow-right'
+            type='font-awesome'
+            color='black'
+            reverse = {true}
+            onPress={() => this.handleSignUp()} />
             </View>
             </KeyboardAwareScrollView>
         );

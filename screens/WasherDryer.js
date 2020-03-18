@@ -7,7 +7,7 @@ class WasherDryer extends React.Component {
     render() {
     return (
       <View>
-      <View style = {{paddingTop: 15, alignItems: 'center'}}>
+      <View style = {{paddingTop: 35, alignItems: 'center'}}>
       <Icon
               raised
               name='home'

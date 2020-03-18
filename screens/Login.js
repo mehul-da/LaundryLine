@@ -48,7 +48,7 @@ class Login extends React.Component {
             <View style = {{paddingBottom: 20}}>
                 <Image source = {require('../logo.png')} style = {{width: 180, height: 180, alignSelf: 'center'}}/>
             </View>
-            <Text style = {{color: "black", fontSize: 25, fontWeight: "bold"}}>LaundryLine</Text>
+            <Text style = {{color: "black", fontSize: 25, fontWeight: "bold", fontFamily: "Trebuchet MS"}}>LaundryLine</Text>
             <View style = {{paddingBottom: 10, paddingTop: 20}}>      
               <TextInput
             style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
@@ -72,16 +72,6 @@ class Login extends React.Component {
             placeholderTextColor = "black"
             clearButtonMode = 'always'/>
             </View>
-            {/* <Button titleStyle = {{fontWeight: "bold"}} color = "white" title = "Login" style = {{width: 100, paddingTop: 8}}
-              buttonStyle = {{backgroundColor: "black", borderRadius: 15}}
-              icon={{
-                name: 'lock',
-                type: 'evillcons',
-                size: 15,
-                color: 'white',
-              }}
-              onPress={() => this.handleLogin()}>
-            </Button> */}
             <Icon
             raised
             name='arrow-right'

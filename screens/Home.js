@@ -13,8 +13,8 @@ class Home extends React.Component {
     render() {
         return (
         <View style = {{alignItems: "center", paddingTop: 30}}>
-        <Text style = {{color:"black", fontSize: 30, fontWeight: "bold"}}>Welcome to</Text>
-        <Text style = {{color:"black", fontSize: 30, fontWeight: "bold", paddingBottom: 20}}>LaundryLine!</Text>
+        <Text style = {{color:"black", fontSize: 30, fontWeight: "bold", fontFamily: "Trebuchet MS"}}>Welcome to</Text>
+        <Text style = {{color:"black", fontSize: 30, fontWeight: "bold", fontFamily: "Trebuchet MS", paddingBottom: 20}}>LaundryLine!</Text>
         <Button color = "white" title = "Log out" style = {{width: 100, paddingTop: 8}}
         buttonStyle = {{backgroundColor: 'black', borderRadius: 15}}
         onPress={this.handleSignout} />

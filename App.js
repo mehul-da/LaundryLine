@@ -13,8 +13,9 @@ if (!global.atob) { global.atob = decode }
 const middleware = applyMiddleware(thunkMiddleware)
 const store = createStore(rootReducer, middleware)
 
-export default class App extends React.Component {
+export default class App extends React.Component {  
     render() {
+      console.log(store.getState())
       return(
       <Provider store = {store}>
         <AppNavigator/>

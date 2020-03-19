@@ -12,25 +12,45 @@ class ChangingWasher extends React.Component {
     this.state = {
       status: this.props.occupied
     }
-    console.log(this.props.occupied)
   }
+
+  nameToShow = "";
 
   renderImage = () => {
     var imgSource = !this.props.occupied ? this.available : this.taken;
+    const value = this.props.washName
+    if (value == 1) {
+      const first = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+        this.nameToShow = documentSnapshot.data().w1
+      })
+    } else if (value == 2) {
+      const second = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+        this.nameToShow = documentSnapshot.data().w2
+      })
+    } else if (value == 3) {
+      const third = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+        this.nameToShow = documentSnapshot.data().w3
+      })
+    } else if (value == 4) {
+      const fourth = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+        this.nameToShow = documentSnapshot.data().w4
+      })
+    } 
+
     if (imgSource == this.taken) {
       return (
         <View>
-        <Image style = {{width: 105, height: 105, alignSelf: 'center'}} 
-          source={ imgSource }
-        />
-        <Text>{this.props.name}</Text>
+        <Image style = {{width: 95, height: 95, alignSelf: 'center'}} 
+          source={ imgSource } />
+        <Text style = {{alignSelf: 'center'}}>{this.nameToShow}</Text>
         </View>
       );
     } else {
       return (
-        <Image style = {{width: 105, height: 105, alignSelf: 'center'}} 
-          source={ imgSource }
-        />
+        <View style = {{paddingBottom: 20}}>
+        <Image style = {{width: 95, height: 95, alignSelf: 'center'}} 
+          source={ imgSource } />
+        </View>
       );
     }
   }
@@ -38,23 +58,50 @@ class ChangingWasher extends React.Component {
   handleUpdate = () => {
     const value = this.props.washName
     if (value == 1) {
-      db.collection('codes').doc(this.props.code).update({
-        w1: !this.state.status
-      })
+      if (this.state.status == "") {
+        db.collection('codes').doc(this.props.code).update({
+          w1: this.props.name
+        })
+      } else {
+        db.collection('codes').doc(this.props.code).update({
+          w1: ""
+        })
+      }
     } else if (value == 2) {
-      db.collection('codes').doc(this.props.code).update({
-        w2: !this.state.status
-      })
+      if (this.state.status == "") {
+        db.collection('codes').doc(this.props.code).update({
+          w2: this.props.name
+        })
+      } else {
+        db.collection('codes').doc(this.props.code).update({
+          w2: ""
+        })
+      }
     } else if (value == 3) {
-      db.collection('codes').doc(this.props.code).update({
-        w3: !this.state.status
-      })
+      if (this.state.status == "") {
+        db.collection('codes').doc(this.props.code).update({
+          w3: this.props.name
+        })
+      } else {
+        db.collection('codes').doc(this.props.code).update({
+          w3: ""
+        })
+      }
     } else if (value == 4) {
-      db.collection('codes').doc(this.props.code).update({
-        w4: !this.state.status
-      })
+      if (this.state.status == "") {
+        db.collection('codes').doc(this.props.code).update({
+          w4: this.props.name
+        })
+      } else {
+        db.collection('codes').doc(this.props.code).update({
+          w4: ""
+        })
+      }
     } 
-    this.setState({status: !this.state.status})
+    if (this.state.status == "")
+      this.setState({status: this.props.name})
+    else
+      this.setState({status: ""})
   }
 
 

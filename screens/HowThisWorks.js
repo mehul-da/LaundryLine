@@ -63,7 +63,7 @@ const slides = [
   {
     key: 's1',
     text: 'This is a simple & intuitive application to simplify the process of doing laundry in college dorms.',
-    backgroundColor: '#99FBFA',
+    backgroundColor: '#D8DBD7',
     icon: 'tumble-dryer',
     type:'material-community'
   },
@@ -72,12 +72,12 @@ const slides = [
     text: 'The code provided by your Resident Assistant gives you access to the status of the laundry machines on your floor.',
     icon: 'numeric',
     type: 'material-community',
-    backgroundColor: '#F2D568',
+    backgroundColor: '#D8DBD7',
   },
   {
     key: 's3',
     text: 'A laundry machine colored green is available while a laundry machine colored red is full and running.',
-    backgroundColor: '#C482F5',
+    backgroundColor: '#D8DBD7',
     icon: 'traffic-light',
     type: 'material-community'
   },
@@ -86,13 +86,13 @@ const slides = [
     text: 'Simply tap on the icon of the laundry machine you\'re using to mark it occupied and untap it once you\'re done to mark it available!',
     icon: 'hand-pointing-down',
     type: 'material-community',
-    backgroundColor: '#F374A8',
+    backgroundColor: '#D8DBD7',
   },
   {
     key: 's5',
     text: 'Please be respectful and considerate of others. Enjoy!',
     icon: 'local-laundry-service' ,
     type: 'material',
-    backgroundColor: '#B5F374',
+    backgroundColor: '#D8DBD7',
   },
 ];

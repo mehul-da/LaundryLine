@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   washersOne: {
     flexDirection: 'row', 
     justifyContent: 'center',
-    paddingTop: 25
+    paddingTop: 20
   },
   washersTwo: {
     flexDirection: 'row', 
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   dryersOne: {
     flexDirection: 'row', 
     justifyContent: 'center',
-    paddingTop: 40,
+    paddingTop: 20,
   },
   dryersTwo: {
     flexDirection: 'row', 

@@ -77,6 +77,7 @@ class Signup extends React.Component {
             <TextInput
             style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
             placeholder = " Name (First & Last)"
+            maxLength = {13}
             placeholderTextColor = "black"
             value = {this.props.user.name}
             onChangeText = {(text) => this.props.updateName(text)}

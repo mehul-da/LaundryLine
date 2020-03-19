@@ -14,7 +14,7 @@ const user = (state = {}, action) => {
         case UPDATE_CODE:
             return { ...state, code: action.payload }
         case UPDATE_NAME:
-            return { ...state, name: action.payload}
+            return { ...state, name: action.payload }
         default:
             return state
     }

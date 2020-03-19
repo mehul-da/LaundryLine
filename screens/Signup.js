@@ -59,8 +59,9 @@ class Signup extends React.Component {
         return (
             <KeyboardAwareScrollView
             resetScrollToCoords={{ x: 0, y: 0 }}
-            scrollEnabled={false}>
-            <View style = {{padding: 17}}>
+            scrollEnabled={false}
+            contentContainerStyle = {{backgroundColor: '#BFF5f5'}}>
+            <View style = {{padding: 21}}>
             <Icon
             raised
             name='chevrons-left'
@@ -110,6 +111,7 @@ class Signup extends React.Component {
             color='black'
             reverse = {true}
             onPress={() => this.handleSignUp()} />
+            <View style = {{backgroundColor: '#BFF5f5', paddingBottom: 300}}></View>
             </View>
             </KeyboardAwareScrollView>
         );

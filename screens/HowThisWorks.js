@@ -69,50 +69,30 @@ const slides = [
   },
   {
     key: 's2',
-    title: 'Flight Booking',
-    text: 'Upto 25% off on Domestic Flights',
-    image: {
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_flight_ticket_booking.png',
-    },
+    text: 'The code provided by your Resident Assistant gives you access to the status of the laundry machines on your floor.',
+    icon: 'numeric',
+    type: 'material-community',
     backgroundColor: '#febe29',
   },
   {
     key: 's3',
-    title: 'Great Offers',
-    text: 'Enjoy Great offers on our all services',
-    image: {
-      uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_discount.png',
-    },
-    backgroundColor: '#22bcb5',
+    text: 'A laundry machine colored green is available while a laundry machine colored red is full and running.',
+    backgroundColor: '#7C4AE7',
+    icon: 'traffic-light',
+    type: 'material-community'
   },
   {
     key: 's4',
-    title: 'Best Deals',
-    text: ' Best Deals on all our services',
-    image: {
-      uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_best_deals.png',
-    },
-    backgroundColor: '#3395ff',
-  },
-  {
-    key: 's5',
-    title: 'Bus Booking',
-    text: 'Enjoy Travelling on Bus with flat 100% off',
-    image: {
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_bus_ticket_booking.png',
-    },
+    text: 'Simply tap on the icon of the laundry machine you\'re using to mark it occupied and untap it once you\'re done to mark it available!',
+    icon: 'hand-pointing-down',
+    type: 'material-community',
     backgroundColor: '#f6437b',
   },
   {
-    key: 's6',
-    title: 'Train Booking',
-    text: ' 10% off on first Train booking',
-    image: {
-      uri:
-        'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_train_ticket_booking.png',
-    },
-    backgroundColor: '#febe29',
+    key: 's5',
+    text: 'Be respectful of others and enjoy!',
+    icon: 'local-laundry-service' ,
+    type: 'material',
+    backgroundColor: '#30AB5B',
   },
 ];

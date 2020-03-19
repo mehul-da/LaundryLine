@@ -29,7 +29,7 @@ class WasherDryer extends React.Component {
         })
     })
     return (
-      <View>
+      <View style = {{backgroundColor: '#BFF5f5'}}>
         <View style = {{flexDirection: "row", alignItems: "center", paddingLeft: 10, paddingTop: 30, paddingBottom: 10}}>
         <View style = {{paddingRight: 15}}>
           <Icon
@@ -58,6 +58,7 @@ class WasherDryer extends React.Component {
         </View>
       </View>
       <AllDryersAndWashers/>
+      <View style = {{backgroundColor: '#BFF5f5', paddingBottom: 100}}></View>
       </View>
     );
   }

@@ -26,7 +26,8 @@ class AllDryersAndWashers extends React.Component {
 
   render() {
     const ok = db.collection('codes').doc(String(this.props.user.code)).get().then(documentSnapshot => {
-      this.setState({w1: documentSnapshot.data().w1,
+      this.setState({
+        w1: documentSnapshot.data().w1,
         w2: documentSnapshot.data().w2,
         w3: documentSnapshot.data().w3,
         w4: documentSnapshot.data().w4,

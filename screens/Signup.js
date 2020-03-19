@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, updateCode, signup } from '../actions/user';
+import Firebase, { db } from '../config/FireBase';
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({ updateEmail, updatePassword, signup, updateCode }, dispatch)
@@ -32,8 +33,26 @@ const styles = StyleSheet.create({
 
 class Signup extends React.Component {
 
+
     handleSignUp = () => {
-        this.props.signup();
+
+        const usersRef = db.collection('codes').doc(String(this.props.user.code))
+        let allowSignup = true;
+            
+        usersRef.get()
+            .then((docSnapshot) => {
+                if (!docSnapshot.exists) {
+                    console.log("start " + allowSignup)
+                    allowSignup = false;
+                    console.log("middle " + allowSignup)
+                    usersRef.onSnapshot((doc) => {
+                        Alert.alert("Error", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email and special code are valid\n4. Your password is at least 6 characters long\n")
+                    });
+                }
+            }).then(() => {
+        if (allowSignup) {
+            this.props.signup();
+            }})
     }
 
     render() {
@@ -80,6 +99,7 @@ class Signup extends React.Component {
             placeholder = " Special Code"
             autoCapitalize = "none"
             autoCorrect = {false}
+            value = {this.props.user.code}
             onChangeText = {(text) => this.props.updateCode(text)}
             placeholderTextColor = "black"/>
             </View>

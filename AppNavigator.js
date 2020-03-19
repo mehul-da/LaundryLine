@@ -16,9 +16,6 @@ const AppNavigator = createSwitchNavigator(
     Signup: {
       screen: Signup
     },
-    Home: {
-      screen: Home
-    },
     WasherDryer: {
       screen: WasherDryer
     }

@@ -56,36 +56,16 @@ export const signup = () => {
                     email: email,
                     code: code
                 }
-                
-                const stateOfWashersDryers = {
-                    w1: false,
-                    w2: false,
-                    w3: false,
-                    w4: false,
-                    d1: false,
-                    d2: false,
-                    d3: false,
-                    d4: false
-                }
 
                 db.collection('users')
                     .doc(response.user.uid)
                     .set(user)
-                
-                const codesRef = db.collection('codes').doc(String(code))
-
-                codesRef.get()
-                    .then((docSnapshot) => {
-                    if (!docSnapshot.exists) {
-                        codesRef.set(stateOfWashersDryers)
-                    }
-                });
-
+            
                 dispatch({ type: SIGNUP, payload: user })
+                
             }
         } catch (e) {
-            console.log(e);
-            Alert.alert("Error!", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email is valid\n4. Your password is at least 6 characters long\n")
+            Alert.alert("Error!", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email and special code are valid\n4. Your password is at least 6 characters long\n")
         }
     }
 }

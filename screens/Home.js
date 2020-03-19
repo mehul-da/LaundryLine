@@ -2,15 +2,31 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, TextInput, Alert } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux'
-import Firebase from '../config/FireBase.js'
+import Firebase, { db } from '../config/FireBase.js'
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            college: "",
+            dormitory: "",
+            floor: ""
+        }
+    }
+
     handleSignout = () => {
         Firebase.auth().signOut()
         this.props.navigation.navigate('Login')
     }
 
     render() {
+        let college = db.collection('codes').doc(String(this.props.user.code)).get().then(documentSnapshot => {
+            this.setState({
+                college: documentSnapshot.data().college,
+                dormitory: documentSnapshot.data().dormitory,
+                floor: documentSnapshot.data().floor
+            })
+        })
         return (
         <View style = {{alignItems: "center", paddingTop: 30}}>
         <Text style = {{color:"black", fontSize: 30, fontWeight: "bold", fontFamily: "Trebuchet MS"}}>Welcome to</Text>
@@ -27,15 +43,12 @@ class Home extends React.Component {
             color= 'black'
             reverse = {true}
             onPress={() => this.props.navigation.navigate('WasherDryer')} />
+        <View style = {{alignItems: 'center', paddingTop: 80}}>
+        <Text >{this.state.college}</Text>
+        <Text >{this.state.dormitory}</Text>
+        <Text >Floor {this.state.floor}</Text> 
+        </View>
         </View>
     );
   }
 }
-
-const mapStateToProps = state => {
-    return {
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps)(Home)

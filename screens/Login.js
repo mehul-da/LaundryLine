@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     screenText: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#BFF5f5'
     },
     homeScreen: {
         flex: 1,
@@ -42,7 +43,7 @@ class Login extends React.Component {
             <KeyboardAwareScrollView
             contentContainerStyle={styles.screenText}
             resetScrollToCoords={{ x: 0, y: 0 }}
-            scrollEnabled={true}>
+            scrollEnabled={false}>
             <View style = {{paddingBottom: 20}}>
                 <Image source = {require('../logo.png')} style = {{width: 180, height: 180, alignSelf: 'center'}}/>
             </View>

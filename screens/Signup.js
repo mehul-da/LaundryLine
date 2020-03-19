@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 105
+        paddingTop: 105,
     },
     homeScreen: {
       flex: 1,
@@ -59,7 +59,7 @@ class Signup extends React.Component {
         return (
             <KeyboardAwareScrollView
             resetScrollToCoords={{ x: 0, y: 0 }}
-            scrollEnabled={true}>
+            scrollEnabled={false}>
             <View style = {{padding: 17}}>
             <Icon
             raised

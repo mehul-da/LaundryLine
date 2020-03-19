@@ -53,6 +53,7 @@ class WasherDryer extends React.Component {
             type='entypo'
             color='black'
             reverse = {true}
+            onPress = {() => this.props.navigation.navigate('HowThisWorks')}
             size = {20}/>
         </View>
       </View>

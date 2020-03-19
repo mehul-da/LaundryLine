@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, Text } from 'react-native';
 import Firebase, { db } from './config/FireBase';
 
 
@@ -16,11 +16,22 @@ class ChangingDryer extends React.Component {
 
   renderImage = () => {
     var imgSource = !this.props.occupied ? this.available : this.taken;
-    return (
-      <Image style = {{width: 105, height: 105, alignSelf: 'center'}} 
-        source={ imgSource }
-      />
-    );
+    if (imgSource == this.taken) {
+      return (
+        <View>
+        <Image style = {{width: 105, height: 105, alignSelf: 'center'}} 
+          source={ imgSource }
+        />
+        <Text>{this.props.name}</Text>
+        </View>
+      );
+    } else {
+      return (
+        <Image style = {{width: 105, height: 105, alignSelf: 'center'}} 
+          source={ imgSource }
+        />
+      );
+    }
   }
 
   handleUpdate = () => {

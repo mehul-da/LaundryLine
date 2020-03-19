@@ -8,8 +8,16 @@ export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 export const UPDATE_CODE = 'UPDATE_CODE'
 export const LOGIN = 'LOGIN'
 export const SIGNUP = 'SIGNUP'
+export const UPDATE_NAME = 'UPDATE_NAME'
 
 // actions
+
+export const updateName = name => {
+    return {
+        type: UPDATE_NAME,
+        payload: name
+    }
+}
 
 export const updateEmail = email => {
     return {

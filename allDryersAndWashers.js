@@ -41,36 +41,36 @@ class AllDryersAndWashers extends React.Component {
         <View>
           <View style = {styles.washersOne}>
             <View style = {styles.individualDryerWasher}>
-              <ChangingWasher occupied = {this.state.w1} washName = {1} code = {String(this.props.user.code)}/>
+              <ChangingWasher occupied = {this.state.w1} washName = {1} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
             <View style = {styles.individualDryerWasher}>
-              <ChangingWasher occupied = {this.state.w2} washName = {2} code = {String(this.props.user.code)}/>
+              <ChangingWasher occupied = {this.state.w2} washName = {2} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
           </View>
           <View style = {styles.washersTwo}>
             <View style = {styles.individualDryerWasher}>
-              <ChangingWasher occupied = {this.state.w3} washName = {3} code = {String(this.props.user.code)}/>
+              <ChangingWasher occupied = {this.state.w3} washName = {3} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
             <View style = {styles.individualDryerWasher}>
-              <ChangingWasher  occupied = {this.state.w4} washName = {4} code = {String(this.props.user.code)}/>
+              <ChangingWasher  occupied = {this.state.w4} washName = {4} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
           </View>
         </View>
         <View>
           <View style = {styles.dryersOne}>
             <View style = {styles.individualDryerWasher}>
-              <ChangingDryer occupied = {this.state.d1} dryerName = {1} code = {String(this.props.user.code)}/>
+              <ChangingDryer occupied = {this.state.d1} dryerName = {1} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
             <View style = {styles.individualDryerWasher}>
-              <ChangingDryer occupied = {this.state.d2} dryerName = {2} code = {String(this.props.user.code)}/>
+              <ChangingDryer occupied = {this.state.d2} dryerName = {2} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
           </View>
           <View style = {styles.dryersTwo}>
             <View style = {styles.individualDryerWasher}>
-              <ChangingDryer occupied = {this.state.d3} dryerName = {3} code = {String(this.props.user.code)}/>
+              <ChangingDryer occupied = {this.state.d3} dryerName = {3} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
             <View style = {styles.individualDryerWasher}>
-              <ChangingDryer occupied = {this.state.d4} dryerName = {4} code = {String(this.props.user.code)}/>
+              <ChangingDryer occupied = {this.state.d4} dryerName = {4} name = {String(this.props.user.name)} code = {String(this.props.user.code)}/>
             </View>
           </View>
         </View>

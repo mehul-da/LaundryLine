@@ -4,11 +4,11 @@ import { Button, Icon } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, updateCode, signup } from '../actions/user';
+import { updateEmail, updatePassword, updateCode, updateName, signup } from '../actions/user';
 import Firebase, { db } from '../config/FireBase';
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ updateEmail, updatePassword, signup, updateCode }, dispatch)
+    return bindActionCreators({ updateEmail, updatePassword, updateName, signup, updateCode }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -35,16 +35,14 @@ class Signup extends React.Component {
 
 
     handleSignUp = () => {
-
+        var nameRegex = /[A-Za-z]+\s[A-Za-z]+/;
         const usersRef = db.collection('codes').doc(String(this.props.user.code))
-        let allowSignup = true;
+        let allowSignup = String(this.props.user.name).length > 2 && nameRegex.test(String(this.props.user.name));
             
         usersRef.get()
             .then((docSnapshot) => {
                 if (!docSnapshot.exists) {
-                    console.log("start " + allowSignup)
                     allowSignup = false;
-                    console.log("middle " + allowSignup)
                     usersRef.onSnapshot((doc) => {
                         Alert.alert("Error", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email and special code are valid\n4. Your password is at least 6 characters long\n")
                     });
@@ -52,7 +50,10 @@ class Signup extends React.Component {
             }).then(() => {
         if (allowSignup) {
             this.props.signup();
-            }})
+        } else {
+            Alert.alert("Error", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email and special code are valid\n4. Your password is at least 6 characters long\n")
+        }
+    })
     }
 
     render() {
@@ -75,6 +76,15 @@ class Signup extends React.Component {
             <View style = {{paddingBottom: 10, paddingTop: 20}}>      
             <TextInput
             style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
+            placeholder = " Name (First & Last)"
+            placeholderTextColor = "black"
+            value = {this.props.user.name}
+            onChangeText = {(text) => this.props.updateName(text)}
+            autoCorrect = {false}/>
+            </View>
+            <View style = {{paddingBottom: 10, paddingTop: 10}}>      
+            <TextInput
+            style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
             placeholder = " Email"
             placeholderTextColor = "black"
             autoCapitalize = "none"
@@ -82,7 +92,7 @@ class Signup extends React.Component {
             onChangeText = {(text) => this.props.updateEmail(text)}
             autoCorrect = {false}/>
             </View>
-            <View style = {{paddingBottom: 10, paddingTop: 10, paddingBottom: 15}}>      
+            <View style = {{paddingTop: 10, paddingBottom: 15}}>      
             <TextInput
             secureTextEntry = {true}
             password = {true}
@@ -94,7 +104,7 @@ class Signup extends React.Component {
             onChangeText = {(text) => this.props.updatePassword(text)}
             placeholderTextColor = "black"/>
             </View>
-            <View style = {{paddingBottom: 10, paddingTop: 6, paddingBottom: 15}}>      
+            <View style = {{paddingTop: 6, paddingBottom: 15}}>      
             <TextInput
             style={{ width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
             placeholder = " Special Code"

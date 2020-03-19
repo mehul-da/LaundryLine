@@ -29,9 +29,9 @@ class WasherDryer extends React.Component {
         })
     })
     return (
-      <View style = {{backgroundColor: '#BFF5f5'}}>
-        <View style = {{flexDirection: "row", alignItems: "center", paddingLeft: 10, paddingTop: 30, paddingBottom: 10}}>
-        <View style = {{paddingRight: 15}}>
+      <View style = {{backgroundColor: '#D8DBD7'}}>
+        <View style = {{flexDirection: "row", alignItems: "center", paddingTop: 40, paddingBottom: 10}}>
+        <View style = {{paddingLeft: 12}}>
           <Icon
               raised
               name='logout'
@@ -41,12 +41,12 @@ class WasherDryer extends React.Component {
               reverse = {true}
               size = {20}/>
         </View>
-        <View style = {{alignItems: 'center', paddingRight: 15}}>
+        <View style = {{alignItems: 'center', paddingLeft: 11, paddingRight: 11}}>
           <Text style = {styles.textStyle}>{this.state.college}</Text>
           <Text style = {styles.textStyle}>{this.state.dormitory}</Text>
           <Text style = {styles.textStyle}>Floor {this.state.floor}</Text> 
         </View>
-        <View>
+        <View style = {{paddingRight: 12}}>
         <Icon
             raised
             name='help'
@@ -58,7 +58,7 @@ class WasherDryer extends React.Component {
         </View>
       </View>
       <AllDryersAndWashers/>
-      <View style = {{backgroundColor: '#BFF5f5', paddingBottom: 100}}></View>
+      <View style = {{backgroundColor: '#D8DBD7', paddingBottom: 100}}></View>
       </View>
     );
   }

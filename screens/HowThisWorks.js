@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 const slides = [
   {
     key: 's1',
-    text: 'A simple & intuitive application to simplify the process of doing laundry in college dorms.',
+    text: 'This is a simple & intuitive application to simplify the process of doing laundry in college dorms.',
     backgroundColor: '#20d2bb',
     icon: 'tumble-dryer',
     type:'material-community'
@@ -90,7 +90,7 @@ const slides = [
   },
   {
     key: 's5',
-    text: 'Be respectful of others and enjoy!',
+    text: 'Please be respectful and considerate of others. Enjoy!',
     icon: 'local-laundry-service' ,
     type: 'material',
     backgroundColor: '#30AB5B',

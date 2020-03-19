@@ -20,19 +20,19 @@ class ChangingDryer extends React.Component {
     var imgSource = !this.props.occupied ? this.available : this.taken;
     const value = this.props.dryerName
     if (value == 1) {
-      const first = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+      db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
         this.nameToShow = documentSnapshot.data().d1
       })
     } else if (value == 2) {
-      const second = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+      db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
         this.nameToShow = documentSnapshot.data().d2
       })
     } else if (value == 3) {
-      const third = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+      db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
         this.nameToShow = documentSnapshot.data().d3
       })
     } else if (value == 4) {
-      const fourth = db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
+      db.collection('codes').doc(String(this.props.code)).get().then(documentSnapshot => {
         this.nameToShow = documentSnapshot.data().d4
       })
     } 

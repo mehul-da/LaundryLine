@@ -21,7 +21,7 @@ class WasherDryer extends React.Component {
   }
  
     render() {
-    let college = db.collection('codes').doc(String(this.props.user.code)).get().then(documentSnapshot => {
+    db.collection('codes').doc(String(this.props.user.code)).get().then(documentSnapshot => {
         this.setState({
             college: documentSnapshot.data().college,
             dormitory: documentSnapshot.data().dormitory,
@@ -30,16 +30,17 @@ class WasherDryer extends React.Component {
     })
     return (
       <View style = {{backgroundColor: '#D8DBD7'}}>
-        <View style = {{flexDirection: "row", alignItems: "center", paddingTop: 40, paddingBottom: 10}}>
+        <View style = {{flexDirection: "row", alignItems: "center", paddingTop: 30, paddingBottom: 10}}>
         <View style = {{paddingLeft: 12}}>
           <Icon
               raised
               name='logout'
               type='simple-line-icon'
               color='black'
+              size = {20}
               onPress = {this.handleSignout}
-              reverse = {true}
-              size = {20}/>
+              reverse = {true}/>
+          <Text style = {{fontSize: 9, alignSelf: 'center'}}>LOG OUT</Text>
         </View>
         <View style = {{alignItems: 'center', paddingLeft: 11, paddingRight: 11}}>
           <Text style = {styles.textStyle}>{this.state.college}</Text>
@@ -55,6 +56,7 @@ class WasherDryer extends React.Component {
             reverse = {true}
             onPress = {() => this.props.navigation.navigate('HowThisWorks')}
             size = {20}/>
+            <Text style = {{fontSize: 9, alignSelf: 'center'}}>HELP</Text>
         </View>
       </View>
       <AllDryersAndWashers/>

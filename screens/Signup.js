@@ -62,7 +62,7 @@ class Signup extends React.Component {
             resetScrollToCoords={{ x: 0, y: 0 }}
             scrollEnabled={false}
             contentContainerStyle = {{backgroundColor: '#D8DBD7'}}>
-            <View style = {{padding: 21}}>
+            <View style = {{paddingLeft: 10, paddingTop: 21}}>
             <Icon
             raised
             name='chevrons-left'
@@ -70,6 +70,7 @@ class Signup extends React.Component {
             color='black'
             reverse = {true}
             onPress={() => this.props.navigation.navigate('Login')} />
+            <Text style = {{fontSize: 9, paddingLeft: 20}}>BACK</Text>
             </View>
             <View style = {styles.screenText}>
             <Text style = {{color:"black", fontSize: 25, fontWeight: "bold", fontFamily: "Trebuchet MS"}}> Sign Up </Text>

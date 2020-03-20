@@ -1,5 +1,7 @@
 import * as React from 'react';
-import AllDryersAndWashers from '../allDryersAndWashers.js';
+import EightDryersAndWashers from '../EightDryersAndWashers.js';
+import FourDryersAndWashers from '../FourDryersAndWashers.js'
+import SixDryersAndWashers from '../SixDryersAndWashers.js'
 import { View, Text, StyleSheet, Image, TextInput, Alert } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux'
@@ -11,23 +13,37 @@ class WasherDryer extends React.Component {
       this.state = {
           college: "",
           dormitory: "",
-          floor: ""
+          floor: "",
+          numMachines: 0
       }
     }
 
     handleSignout = () => {
       Firebase.auth().signOut()
       this.props.navigation.navigate('Login')
-  }
+    }
+
+    handleNumMachines = () => {
+    if (this.state.numMachines == 4) {
+        return <FourDryersAndWashers/>
+    } else if (this.state.numMachines == 6) {
+        return <SixDryersAndWashers/>
+    } else if (this.state.numMachines == 8) {
+        return <EightDryersAndWashers/>
+    }
+    }
+
  
     render() {
     db.collection('codes').doc(String(this.props.user.code)).get().then(documentSnapshot => {
         this.setState({
             college: documentSnapshot.data().college,
             dormitory: documentSnapshot.data().dormitory,
-            floor: documentSnapshot.data().floor
+            floor: documentSnapshot.data().floor,
+            numMachines: documentSnapshot.data().numMachines
         })
     })
+
     return (
       <View style = {{backgroundColor: '#D8DBD7'}}>
         <View style = {{flexDirection: "row", alignItems: "center", paddingTop: 30, paddingBottom: 10}}>
@@ -59,8 +75,8 @@ class WasherDryer extends React.Component {
             <Text style = {{fontSize: 9, alignSelf: 'center'}}>HELP</Text>
         </View>
       </View>
-      <AllDryersAndWashers/>
-      <View style = {{backgroundColor: '#D8DBD7', paddingBottom: 100}}></View>
+      {this.handleNumMachines()}
+      <View style = {{backgroundColor: '#D8DBD7', paddingBottom: 300}}></View>
       </View>
     );
   }

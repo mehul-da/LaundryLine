@@ -40,15 +40,15 @@ class ChangingDryer extends React.Component {
     if (imgSource == this.taken) {
       return (
         <View>
-        <Image style = {{width: 95, height: 95, alignSelf: 'center'}} 
+        <Image style = {{width: this.props.size, height: this.props.size, alignSelf: 'center'}} 
           source={ imgSource } />
-        <Text style = {{alignSelf: 'center'}}>{this.nameToShow}</Text>
+        <Text style = {{alignSelf: 'center', fontFamily: "Trebuchet MS"}}>{this.nameToShow}</Text>
         </View>
       );
     } else {
       return (
         <View style = {{paddingBottom: 20}}>
-        <Image style = {{width: 95, height: 95, alignSelf: 'center'}} 
+        <Image style = {{width: this.props.size, height: this.props.size, alignSelf: 'center'}} 
           source={ imgSource } />
         </View>
       );

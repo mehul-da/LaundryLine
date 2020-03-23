@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, TextInput, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Button, Icon } from 'react-native-elements';
+import { Button, Icon, Input } from 'react-native-elements';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, login, getUser } from '../actions/user'
@@ -23,12 +23,26 @@ const styles = StyleSheet.create({
 
 class Login extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount = () => {
         Firebase.auth().onAuthStateChanged(user => {
+            let alreadySent = false;
             if (user) {
                 this.props.getUser(user.uid)
                 if (this.props.user != null) {
-                    this.props.navigation.navigate('WasherDryer');
+                    if (!user.emailVerified && !alreadySent) {
+                        user.sendEmailVerification().then(function() {
+                            // Email sent.
+                        }).catch(function(error) {
+                            // An error happened.
+                        });
+                        alreadySent = true;
+                        this.props.navigation.navigate('Verification');
+                    }  else 
+                        this.props.navigation.navigate('WasherDryer')
                 }
             }
         })
@@ -44,33 +58,39 @@ class Login extends React.Component {
             contentContainerStyle={styles.screenText}
             resetScrollToCoords={{ x: 0, y: 0 }}
             scrollEnabled={false}>
-            <View style = {{paddingBottom: 20}}>
+            <View style = {{paddingBottom: 25}}>
                 <Image source = {require('../logo.png')} style = {{width: 180, height: 180, alignSelf: 'center'}}/>
             </View>
-            <Text style = {{color: "black", fontSize: 25, fontWeight: "bold", fontFamily: "Trebuchet MS"}}>LaundryLine</Text>
-            <View style = {{paddingBottom: 10, paddingTop: 20}}>      
-              <TextInput
-            style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
-            placeholder = " Email"
-            autoCapitalize = "none"
-            autoCorrect = {false}
-            value = {this.props.user.email}
-            onChangeText = {(text) => this.props.updateEmail(text)}
-            placeholderTextColor = "black"/>
+            <Text style = {{color: "black", fontSize: 35, fontFamily: "Verdana"}}>laundryline</Text>
+            <View style = {{paddingBottom: 10, paddingTop: 32}}>   
+            <View style = {{width: 280}}>  
+                <Input
+                leftIcon={{ type: 'material-community', name: 'email' }} 
+                leftIconContainerStyle = {{paddingRight: 10}}
+                inputStyle = {{fontSize: 16}}
+                autoCapitalize = "none"
+                autoCorrect = {false}
+                value = {this.props.user.email}
+                onChangeText = {(text) => this.props.updateEmail(text)}
+                placeholder = "Email"/>
+            </View> 
             </View>
-            <View style = {{paddingBottom: 10, paddingTop: 10, paddingBottom: 15}}>      
-            <TextInput
-            secureTextEntry = {true}
-            password = {true}
-            autoCapitalize = "none"
-            style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
-            placeholder = " Password"
-            autoCorrect = {false}
-            value = {this.props.user.password}
-            onChangeText = {(text) => this.props.updatePassword(text)}
-            placeholderTextColor = "black"
-            clearButtonMode = 'always'/>
+            <View style = {{paddingTop: 10}}>     
+            <View style = {{width: 280}}>  
+                <Input
+                leftIcon={{ type: 'material-community', name: 'lock' }} 
+                leftIconContainerStyle = {{paddingRight: 10}}
+                inputStyle = {{fontSize: 16}}
+                autoCapitalize = "none"
+                secureTextEntry = {true}
+                password = {true}
+                autoCorrect = {false}
+                value = {this.props.user.password}
+                onChangeText = {(text) => this.props.updatePassword(text)}
+                placeholder = "Password"/>
+            </View> 
             </View>
+            <View style = {{paddingTop: 28}}>
             <Icon
             raised
             name='arrow-right'
@@ -78,7 +98,8 @@ class Login extends React.Component {
             color='black'
             reverse = {true}
             onPress={() => this.handleLogin()} />
-            <View style = {{paddingTop: 24}}>
+            </View>
+            <View style = {{paddingTop: 20}}>
             <Text style = {{fontSize: 13, color:"black", textAlign: "center"}}> Don't have an account yet? </Text>
             <Text style={{fontSize: 13, color:"rgb(245,92,92)", textAlign: "center"}} onPress={()=> this.props.navigation.navigate('Signup')}> Sign up. </Text>
             </View>
@@ -101,3 +122,5 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Login)
+
+

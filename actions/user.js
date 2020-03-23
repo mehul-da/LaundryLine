@@ -66,6 +66,8 @@ export const signup = () => {
                     name: name
                 }
 
+                response.user.emailVerified = false;
+
                 db.collection('users')
                     .doc(response.user.uid)
                     .set(user)

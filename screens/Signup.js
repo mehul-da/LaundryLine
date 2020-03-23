@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, TextInput, Alert } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Button, Icon, Input } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 105,
+        paddingTop: 70,
     },
     homeScreen: {
       flex: 1,
@@ -38,11 +38,13 @@ class Signup extends React.Component {
         var nameRegex = /[A-Za-z]+\s[A-Za-z]+/;
         const usersRef = db.collection('codes').doc(String(this.props.user.code))
         let allowSignup = String(this.props.user.name).length > 2 && nameRegex.test(String(this.props.user.name));
-            
+        let alreadyAlerted = false;
+
         usersRef.get()
             .then((docSnapshot) => {
                 if (!docSnapshot.exists) {
                     allowSignup = false;
+                    alreadyAlerted = true;
                     usersRef.onSnapshot((doc) => {
                         Alert.alert("Error", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email and special code are valid\n4. Your password is at least 6 characters long\n")
                     });
@@ -50,7 +52,7 @@ class Signup extends React.Component {
             }).then(() => {
         if (allowSignup) {
             this.props.signup();
-        } else {
+        } else if (!alreadyAlerted) {
             Alert.alert("Error", "Please make sure:\n1. An account with this email hasn't already been authenticated\n2. All fields are filled in\n3. Your email and special code are valid\n4. Your password is at least 6 characters long\n")
         }
     })
@@ -70,51 +72,62 @@ class Signup extends React.Component {
             color='black'
             reverse = {true}
             onPress={() => this.props.navigation.navigate('Login')} />
-            <Text style = {{fontSize: 9, paddingLeft: 20}}>BACK</Text>
             </View>
             <View style = {styles.screenText}>
-            <Text style = {{color:"black", fontSize: 25, fontWeight: "bold", fontFamily: "Trebuchet MS"}}> Sign Up </Text>
-            <View style = {{paddingBottom: 10, paddingTop: 20}}>      
-            <TextInput
-            style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
-            placeholder = " Name (First & Last)"
-            maxLength = {13}
-            placeholderTextColor = "black"
-            value = {this.props.user.name}
-            onChangeText = {(text) => this.props.updateName(text)}
-            autoCorrect = {false}/>
+            <Text style = {{color: "black", fontSize: 32, fontFamily: "Verdana"}}>Create Account</Text>
+            <View style = {{paddingBottom: 10, paddingTop: 40}}>     
+            <View style = {{width: 280}}>
+            <Input
+                leftIcon={{ type: 'font-awesome', name: 'user' }} 
+                leftIconContainerStyle = {{paddingLeft: 3, paddingRight: 14}}
+                inputStyle = {{fontSize: 16}}
+                autoCorrect = {false}
+                value = {this.props.user.name}
+                onChangeText = {(text) => this.props.updateName(text)}
+                maxLength = {13}
+                placeholder = "Name (First & Last)"/> 
+            </View>
             </View>
             <View style = {{paddingBottom: 10, paddingTop: 10}}>      
-            <TextInput
-            style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
-            placeholder = " Email"
-            placeholderTextColor = "black"
-            autoCapitalize = "none"
-            value = {this.props.user.email}
-            onChangeText = {(text) => this.props.updateEmail(text)}
-            autoCorrect = {false}/>
+            <View style = {{width: 280}}>  
+                <Input
+                leftIcon={{ type: 'material-community', name: 'email' }} 
+                leftIconContainerStyle = {{paddingRight: 10}}
+                inputStyle = {{fontSize: 16}}
+                autoCapitalize = "none"
+                autoCorrect = {false}
+                value = {this.props.user.email}
+                onChangeText = {(text) => this.props.updateEmail(text)}
+                placeholder = "Email"/>
+            </View> 
             </View>
-            <View style = {{paddingTop: 10, paddingBottom: 15}}>      
-            <TextInput
-            secureTextEntry = {true}
-            password = {true}
-            style={{width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
-            placeholder = " Password"
-            value = {this.props.user.password}
-            autoCapitalize = "none"
-            autoCorrect = {false}
-            onChangeText = {(text) => this.props.updatePassword(text)}
-            placeholderTextColor = "black"/>
+            <View style = {{paddingTop: 10, paddingBottom: 10}}>      
+            <View style = {{width: 280}}>  
+                <Input
+                leftIcon={{ type: 'material-community', name: 'lock' }} 
+                leftIconContainerStyle = {{paddingRight: 10}}
+                inputStyle = {{fontSize: 16}}
+                autoCapitalize = "none"
+                secureTextEntry = {true}
+                password = {true}
+                autoCorrect = {false}
+                value = {this.props.user.password}
+                onChangeText = {(text) => this.props.updatePassword(text)}
+                placeholder = "Password"/>
+            </View> 
             </View>
-            <View style = {{paddingTop: 6, paddingBottom: 15}}>      
-            <TextInput
-            style={{ width: 200, height: 40, borderRadius: 10, borderWidth: 2, borderColor: "black", color: "black", paddingLeft: 5}}
-            placeholder = " Special Code"
-            autoCapitalize = "none"
-            autoCorrect = {false}
-            value = {this.props.user.code}
-            onChangeText = {(text) => this.props.updateCode(text)}
-            placeholderTextColor = "black"/>
+            <View style = {{paddingTop: 10, paddingBottom: 40}}>  
+            <View style = {{width: 280}}>  
+                <Input
+                leftIcon={{ type: 'material-community', name: 'onepassword' }} 
+                leftIconContainerStyle = {{paddingRight: 10}}
+                inputStyle = {{fontSize: 16}}
+                autoCapitalize = "none"
+                autoCorrect = {false}
+                value = {this.props.user.code}
+                onChangeText = {(text) => this.props.updateCode(text)}
+                placeholder = "Special Code"/>
+            </View>     
             </View>
             <Icon
             raised

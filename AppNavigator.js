@@ -4,6 +4,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import WasherDryer from './screens/WasherDryer';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
+import Verification from './screens/Verification';
 import HowThisWorks from './screens/HowThisWorks';
 import Firebase, {db} from './config/FireBase';
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
@@ -21,6 +22,9 @@ const AppNavigator = createSwitchNavigator(
     },
     HowThisWorks: {
       screen: HowThisWorks
+    },
+    Verification: {
+      screen: Verification
     }
   },
   {

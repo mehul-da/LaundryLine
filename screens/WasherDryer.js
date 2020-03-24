@@ -70,7 +70,7 @@ class WasherDryer extends React.Component {
             type='entypo'
             color='black'
             reverse = {true}
-            onPress = {() => this.props.navigation.navigate('HowThisWorks')}
+            onPress = {() => this.props.navigation.navigate('Chat')}
             size = {20}/>
             <Text style = {{fontSize: 9, alignSelf: 'center'}}>HELP</Text>
         </View>

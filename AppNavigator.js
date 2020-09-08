@@ -6,7 +6,9 @@ import Verification from './screens/Verification';
 import HowThisWorks from './screens/HowThisWorks';
 import Chat from './screens/Chat'
 import Firebase, {db} from './config/FireBase';
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator,  } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const AppNavigator = createSwitchNavigator(
   {
@@ -22,11 +24,11 @@ const AppNavigator = createSwitchNavigator(
     HowThisWorks: {
       screen: HowThisWorks
     },
-    Verification: {
-      screen: Verification
-    },
     Chat: {
       screen: Chat
+    },
+    Verification: {
+      screen: Verification
     }
   },
   {

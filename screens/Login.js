@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, login, getUser } from '../actions/user'
 import Firebase from '../config/FireBase.js'
+import WasherDryer from './WasherDryer';
 
 const styles = StyleSheet.create({
     screenText: {
@@ -42,7 +43,7 @@ class Login extends React.Component {
                         alreadySent = true;
                         this.props.navigation.navigate('Verification');
                     }  else 
-                        this.props.navigation.navigate('WasherDryer')
+                        this.props.navigation.navigate('WasherDryer');
                 }
             }
         })

@@ -6,6 +6,8 @@ import { View, Text, StyleSheet, Image, TextInput, Alert } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux'
 import Firebase, { db } from '../config/FireBase.js'
+import Chat from '../screens/Chat';
+import Login from '../screens/Login';
 
 class WasherDryer extends React.Component {
     constructor(props) {

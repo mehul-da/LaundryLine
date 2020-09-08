@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-
+import { connect } from 'react-redux'
 import {
     API_KEY,
     AUTH_DOMAIN,
@@ -20,9 +20,23 @@ const firebaseConfig = {
     appId: APP_ID
 }
 
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
 
-const Firebase = firebase.initializeApp(firebaseConfig)
+let Firebase;
+class FirebaseSvc {
+    constructor() {
+        if (!firebase.apps.length) { //avoid re-initializing
+            Firebase = firebase.initializeApp(firebaseConfig);
+        }
+    }  
+  }
 
-export const db = firebase.firestore()
-
+export const firebaseSVC = connect(mapStateToProps)(FirebaseSvc);
+export const firebaseSvc = new FirebaseSvc();
+export const db = firebase.firestore();
+export const realtime = firebase.database();
 export default Firebase;

@@ -1,4 +1,4 @@
-import Firebase, {db} from '../config/FireBase.js'
+import Firebase, {db} from '../config/Firebase.js'
 import { Alert } from 'react-native';
 
 // types

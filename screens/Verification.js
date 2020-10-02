@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button, Icon, Input } from 'react-native-elements';
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, login, getUser } from '../actions/user'
-import Firebase from '../config/FireBase.js'
+import Firebase from '../config/Firebase.js'
 
 const styles = StyleSheet.create({
     screenText: {

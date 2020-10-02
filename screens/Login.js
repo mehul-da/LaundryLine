@@ -5,7 +5,7 @@ import { Button, Icon, Input } from 'react-native-elements';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, login, getUser } from '../actions/user'
-import Firebase from '../config/FireBase.js'
+import Firebase from '../config/Firebase.js'
 import WasherDryer from './WasherDryer';
 
 const styles = StyleSheet.create({
@@ -60,7 +60,7 @@ class Login extends React.Component {
             resetScrollToCoords={{ x: 0, y: 0 }}
             scrollEnabled={false}>
             <View style = {{paddingBottom: 25}}>
-                <Image source = {require('../logo.png')} style = {{width: 180, height: 180, alignSelf: 'center'}}/>
+                <Image source = {require('../assets/logo.png')} style = {{width: 180, height: 180, alignSelf: 'center'}}/>
             </View>
             <Text style = {{color: "black", fontSize: 35, fontFamily: "Verdana"}}>laundryline</Text>
             <View style = {{paddingBottom: 10, paddingTop: 32}}>   

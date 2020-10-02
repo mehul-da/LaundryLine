@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { updateEmail, updatePassword, updateCode, updateName, signup } from '../actions/user';
-import Firebase, { db } from '../config/FireBase';
+import Firebase, { db } from '../config/Firebase';
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({ updateEmail, updatePassword, updateName, signup, updateCode }, dispatch)

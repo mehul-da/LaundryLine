@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import Washer from './washer';
-import Dryer from './dryer';
+import Washer from './Washer';
+import Dryer from './Dryer';
 import { Button, Icon } from 'react-native-elements';
 import Firebase, { db } from '../config/Firebase'
 import { connect } from 'react-redux'

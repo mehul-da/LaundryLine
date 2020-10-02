@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import Washer from './components/washer';
-import Dryer from './components/dryer';
+import Washer from './washer';
+import Dryer from './dryer';
 import { Button, Icon } from 'react-native-elements';
-import Firebase, { db } from './config/Firebase'
+import Firebase, { db } from '../config/Firebase'
 import { connect } from 'react-redux'
 import { documentDirectory } from 'expo-file-system';
 

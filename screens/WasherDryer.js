@@ -1,7 +1,7 @@
 import * as React from 'react';
-import EightDryersAndWashers from '../EightDryersAndWashers.js';
-import FourDryersAndWashers from '../FourDryersAndWashers.js'
-import SixDryersAndWashers from '../SixDryersAndWashers.js'
+import EightDryersAndWashers from '../components/EightDryersAndWashers.js';
+import FourDryersAndWashers from '../components/FourDryersAndWashers.js'
+import SixDryersAndWashers from '../components/SixDryersAndWashers.js'
 import { View, Text, StyleSheet, Image, TextInput, Alert } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux'

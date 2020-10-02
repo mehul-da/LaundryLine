@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from 'react-native-elements';
 import SignupNameTextInput from './SignupName';
 import SignupPasswordTextInput from './SignupPassword';
-import SpecialCodeTextInput from './SpecialCodeInput';
+import SpecialCodeTextInput from './components/SpecialCodeInput';
 
 export default function SignupScreen({ navigation }) {
     return (

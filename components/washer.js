@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View, TouchableOpacity, Image, Text } from 'react-native';
-import Firebase, { db } from './config/Firebase';
+import Firebase, { db } from '../config/Firebase';
 
 
-class ChangingWasher extends React.Component {
-  available = require('./assets/washers/Washer_GREEN.png')
-  taken = require('./assets/washers/Washer_RED.png');
+class Washer extends React.Component {
+  available = require('../assets/washers/Washer_GREEN.png')
+  taken = require('../assets/washers/Washer_RED.png');
 
   constructor(props) {
     super(props);
@@ -116,4 +116,4 @@ class ChangingWasher extends React.Component {
   }
 }
 
-export default ChangingWasher;
+export default Washer;
